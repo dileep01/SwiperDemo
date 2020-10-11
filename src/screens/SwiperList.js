@@ -6,16 +6,15 @@ import {BASE_URL} from '../utils/apiRequest';
 import NetworkUtils from '../utils/NetworkUtils';
 import AppLoader from '../corecomponents/AppLoader';
 import styles from '../styles/SwiperListStyles';
-
+import ErrorScreen from '../corecomponents/ErrorScreen';
+import {ERROR_TEXT} from '../utils/constants';
 const SwiperList = props => {
-  const {data, getAppData} = props;
+  const {data, getAppData, error} = props;
   useEffect(() => {
-    // (async () => {
-    //   const isConnected = await NetworkUtils.isNetworkAvailable();
-    //   isConnected && getAppData();
-    // })();
-    getAppData();
-    console.log('RENDER');
+    (async () => {
+      const isConnected = await NetworkUtils.isNetworkAvailable();
+      isConnected && getAppData();
+    })();
   }, []);
 
   let lapsList = null;
@@ -47,7 +46,9 @@ const SwiperList = props => {
       </View>
     );
   }
-
+  if (error) {
+    return <ErrorScreen errorText={ERROR_TEXT} />;
+  }
   return <AppLoader />;
 };
 
