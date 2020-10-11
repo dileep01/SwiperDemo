@@ -4,9 +4,9 @@ import {getAppData} from '../actions/appdata.action';
 
 const mapStateToProps = state => {
   return {
-    // loading: state.appData.loading,
-    // error: state.appData.error,
-    // status: state.appData.status,
+    loading: state.appData.loading,
+    error: state.appData.error,
+    status: state.appData.status,
     data: state.appData.data,
   };
 };
